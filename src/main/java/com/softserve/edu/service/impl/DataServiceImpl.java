@@ -57,6 +57,21 @@ public class DataServiceImpl implements DataService {
 
     public void addSprint(String sprintName) {
         // TODO for sprints
+        if (sprints.isEmpty()) {
+            Entity sprintToAdd = new Entity(1, sprintName);
+            sprints.add(sprintToAdd);
+        } else {
+            List<Integer> sprintsIdList = new ArrayList<>();
+            int maxSprintId;
+
+            for (Entity entity : sprints) {
+                sprintsIdList.add(entity.getId());
+            }
+
+            maxSprintId = Collections.max(sprintsIdList);
+
+            sprints.add(new Entity(++maxSprintId, sprintName));
+        }
     }
 
     public void addCommunication(String studentName, String mentorName) {
