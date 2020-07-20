@@ -38,6 +38,21 @@ public class DataServiceImpl implements DataService {
 
     public void addMentor(String mentorName) {
         // TODO for mentors
+        if (mentors.isEmpty()) {
+            Entity mentorToAdd = new Entity(1, mentorName);
+            mentors.add(mentorToAdd);
+        } else {
+            List<Integer> mentorsIdList = new ArrayList<>();
+            int maxMentorId;
+
+            for(Entity entity : mentors) {
+                mentorsIdList.add(entity.getId());
+            }
+
+            maxMentorId = Collections.max(mentorsIdList);
+
+            mentors.add(new Entity(++maxMentorId, mentorName));
+        }
     }
 
     public void addSprint(String sprintName) {
