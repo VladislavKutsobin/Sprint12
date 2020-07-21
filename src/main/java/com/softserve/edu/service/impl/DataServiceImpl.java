@@ -76,6 +76,22 @@ public class DataServiceImpl implements DataService {
 
     public void addCommunication(String studentName, String mentorName) {
         // TODO for communication
+        Communication communication = new Communication();
+
+        for (Entity student : students) {
+            if (student.getName().equals(studentName)) {
+                communication.setIdStudent(student.getId());
+            }
+        }
+
+        for (Entity mentor : mentors) {
+            if (mentor.getName().equals(mentorName)) {
+                communication.setIdMentor(mentor.getId());
+            }
+        }
+
+        this.communication.add(communication);
+
     }
 
     public void addSolution(String studentName, String sprintName, int score) {
